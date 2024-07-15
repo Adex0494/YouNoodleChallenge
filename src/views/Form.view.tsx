@@ -4,7 +4,7 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { useUpdateAnswers } from '../api-hooks/useUpdateAnswers'
-import { CheckboxGroup } from '../components'
+// import { CheckboxGroup } from '../components'
 import { useAnswersStore } from '../state'
 
 import { validationSchema } from './Form.config'

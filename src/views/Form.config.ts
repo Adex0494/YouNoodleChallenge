@@ -3,6 +3,8 @@ import { object, string, mixed } from 'yup'
 const IS_REQUIRED_MSG = 'This field is required'
 const IS_NUMBER_MSG = 'This field must be a number'
 const IS_EMAIL_MSG = 'This field must be a valid email'
+const MIN_AGE_MSG = 'The minimum age must be 18'
+const MAX_AGE_MSG = 'The maximum age must be 99'
 const MIN_WORDS_MSG = (minWords: number) =>
     `At least ${minWords} words are required`
 const MAX_WORDS_MSG = (maxLength: number) =>
@@ -33,6 +35,16 @@ export const validationSchema = object().shape({
             'isNumber',
             IS_NUMBER_MSG,
             (value: string) => !isNaN(Number(value)),
+        )
+        .test(
+            'hasMaxAge',
+            MAX_AGE_MSG,
+            (value: string) => !isNaN(Number(value)) && Number(value) <= 99,
+        )
+        .test(
+            'hasMinAge',
+            MIN_AGE_MSG,
+            (value: string) => !isNaN(Number(value)) && Number(value) >= 18,
         ),
     // TASK 3:
     // - Implement a validation rule for the 'interests' field.
