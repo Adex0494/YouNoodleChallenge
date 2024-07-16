@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Button, TextField } from '@mui/material'
 import React, { useState, useEffect } from 'react'
+// import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { useUpdateAnswers } from '../api-hooks/useUpdateAnswers'
@@ -48,7 +49,15 @@ export const FormView = () => {
         })
     })
 
-    console.log(interests)
+    const getAnswerInterestsMap = () =>
+        interests.map(interest => {
+            const entry = Object.entries(interest)[0]
+            return {
+                id: entry[0],
+                label: entry[1].label,
+                checked: entry[1].isChecked,
+            }
+        })
 
     return (
         <div id="form-view">
@@ -114,22 +123,17 @@ export const FormView = () => {
                 <Controller
                     name="interests"
                     control={control}
-                    render={() => (
+                    defaultValue={getAnswerInterestsMap()}
+                    render={({ field: { onChange } }) => (
                         <CheckboxGroup
                             id="interests"
-                            error={false}
-                            helperText="Please, select interests"
+                            error={!!errors.interests?.message}
+                            helperText={errors.interests?.message || ''}
                             label="Interests"
-                            options={interests.map(interest => {
-                                const entry = Object.entries(interest)[0]
-                                return {
-                                    id: entry[0],
-                                    label: entry[1].label,
-                                    checked: entry[1].isChecked,
-                                }
-                            })}
-                            onChange={options => {
-                                onInterestChangeHandler(options)
+                            options={getAnswerInterestsMap()}
+                            onChange={e => {
+                                onInterestChangeHandler(e)
+                                return onChange(e)
                             }}
                         />
                     )}
