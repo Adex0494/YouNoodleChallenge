@@ -1,16 +1,32 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Button, TextField } from '@mui/material'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { useUpdateAnswers } from '../api-hooks/useUpdateAnswers'
-// import { CheckboxGroup } from '../components'
+import { CheckboxGroup } from '../components'
+import { CustomCheckboxProps } from '../components/CheckboxGroup'
 import { useAnswersStore } from '../state'
 
 import { validationSchema } from './Form.config'
 
 export const FormView = () => {
     const answers = useAnswersStore(state => state.getAnswers())
+    const [interests, setInterests] = useState(answers.interests)
+
+    useEffect(() => {
+        setInterests(answers.interests)
+    }, [answers.interests])
+
+    const onInterestChangeHandler = (options: CustomCheckboxProps[]) => {
+        const interestsMap = options.map(option => ({
+            [option.id]: {
+                isChecked: option.checked || false,
+                label: option.label || '',
+            },
+        }))
+        setInterests(interestsMap)
+    }
 
     const {
         control,
@@ -31,6 +47,8 @@ export const FormView = () => {
             interests: [],
         })
     })
+
+    console.log(interests)
 
     return (
         <div id="form-view">
@@ -93,12 +111,29 @@ export const FormView = () => {
                     CheckboxGroup's options. This could be detrimental
                     to your final assessment.
                 */}
-                {/* <Controller
+                <Controller
+                    name="interests"
+                    control={control}
                     render={() => (
                         <CheckboxGroup
+                            id="interests"
+                            error={false}
+                            helperText="Please, select interests"
+                            label="Interests"
+                            options={interests.map(interest => {
+                                const entry = Object.entries(interest)[0]
+                                return {
+                                    id: entry[0],
+                                    label: entry[1].label,
+                                    checked: entry[1].isChecked,
+                                }
+                            })}
+                            onChange={options => {
+                                onInterestChangeHandler(options)
+                            }}
                         />
                     )}
-                /> */}
+                />
                 <Button
                     variant="contained"
                     disabled={!isValid}
