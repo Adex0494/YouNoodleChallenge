@@ -45,7 +45,7 @@ export const FormView = () => {
             name: formData.name,
             mail: formData.mail,
             age: formData.age,
-            interests: [],
+            interests,
         })
     })
 
@@ -84,6 +84,7 @@ export const FormView = () => {
                 <Controller
                     name="age"
                     control={control}
+                    defaultValue={answers.age}
                     render={({ field: { onChange, value } }) => (
                         <TextField
                             label="Age"
