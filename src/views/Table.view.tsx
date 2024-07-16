@@ -8,7 +8,9 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
+import { APP_ROUTES } from '../domain/routes'
 import { useAnswersStore } from '../state'
 
 // TASK 4:
@@ -37,6 +39,7 @@ function createData(question: string, answer: string) {
 
 export function TableView() {
     const answers = useAnswersStore(state => state.getAnswers())
+    const navigate = useNavigate()
 
     const getInterests = () =>
         answers.interests
@@ -75,7 +78,7 @@ export function TableView() {
                     <EditIcon
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                            console.log('clicked edit')
+                            navigate(APP_ROUTES.FORM)
                         }}
                     />
                     <DeleteIcon
