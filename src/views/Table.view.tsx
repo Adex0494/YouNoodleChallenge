@@ -1,3 +1,5 @@
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -57,7 +59,32 @@ export function TableView() {
     ]
     return (
         <div id="table-view">
-            <TableContainer component={Paper}>
+            <TableContainer
+                component={Paper}
+                style={{ position: 'relative', overflow: 'visible' }}
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: -40,
+                        right: 0,
+                        display: 'flex',
+                        gap: 16,
+                    }}
+                >
+                    <EditIcon
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                            console.log('clicked edit')
+                        }}
+                    />
+                    <DeleteIcon
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                            console.log('clicked delete')
+                        }}
+                    />
+                </div>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
