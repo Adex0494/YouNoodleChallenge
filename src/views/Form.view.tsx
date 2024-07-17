@@ -72,6 +72,7 @@ export const FormView = () => {
                     defaultValue={answers.name}
                     render={({ field: { onChange, value } }) => (
                         <TextField
+                            aria-label="name text field"
                             label="Name"
                             variant="standard"
                             onChange={onChange}
@@ -87,6 +88,7 @@ export const FormView = () => {
                     defaultValue={answers.age}
                     render={({ field: { onChange, value } }) => (
                         <TextField
+                            aria-label="age text field"
                             label="Age"
                             variant="standard"
                             onChange={onChange}
@@ -102,6 +104,7 @@ export const FormView = () => {
                     defaultValue={answers.mail}
                     render={({ field: { onChange, value } }) => (
                         <TextField
+                            aria-label="email text field"
                             label="Email"
                             variant="standard"
                             onChange={onChange}
@@ -127,6 +130,7 @@ export const FormView = () => {
                     defaultValue={getAnswerInterestsMap()}
                     render={({ field: { onChange } }) => (
                         <CheckboxGroup
+                            aria-label="interests checkbox Group"
                             id="interests"
                             error={!!errors.interests?.message}
                             helperText={errors.interests?.message || ''}
@@ -140,6 +144,7 @@ export const FormView = () => {
                     )}
                 />
                 <Button
+                    aria-label="submit button"
                     variant="contained"
                     disabled={!isValid}
                     onClick={onSubmit}

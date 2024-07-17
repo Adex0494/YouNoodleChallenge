@@ -74,18 +74,27 @@ export function TableView() {
                         gap: 16,
                     }}
                 >
-                    <EditIcon
-                        style={{ cursor: 'pointer' }}
+                    <button
+                        aria-label="edit button"
+                        style={{ border: 'none', background: 'unset' }}
                         onClick={() => {
                             navigate(APP_ROUTES.FORM)
                         }}
-                    />
-                    <DeleteIcon
-                        style={{ cursor: 'pointer' }}
+                    >
+                        <EditIcon role="button" style={{ cursor: 'pointer' }} />
+                    </button>
+                    <button
+                        aria-label="delete button"
+                        style={{ border: 'none', background: 'unset' }}
                         onClick={() => {
                             resetAnswersMutation.mutate()
                         }}
-                    />
+                    >
+                        <DeleteIcon
+                            role="button"
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </button>
                 </div>
                 <Table sx={{ minWidth: 350 }} aria-label="simple table">
                     <TableHead>
