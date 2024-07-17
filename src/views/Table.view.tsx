@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { useResetAnswers } from '../api-hooks/useResetAnswers'
 import { APP_ROUTES } from '../domain/routes'
 import { useAnswersStore } from '../state'
 
@@ -27,12 +28,6 @@ import { useAnswersStore } from '../state'
 // - Invoke useResetAnswers hook on delete button click.
 // - See useResetAnswers hook for more guidelines.
 
-// export const TableView = () => {
-//     const answers = useAnswersStore(state => state.getAnswers())
-//     console.log('table answers:', answers)
-//     return <div id="table-view"></div>
-// }
-
 function createData(question: string, answer: string) {
     return { question, answer }
 }
@@ -40,6 +35,7 @@ function createData(question: string, answer: string) {
 export function TableView() {
     const answers = useAnswersStore(state => state.getAnswers())
     const navigate = useNavigate()
+    const resetAnswersMutation = useResetAnswers()
 
     const getInterests = () =>
         answers.interests
@@ -84,7 +80,7 @@ export function TableView() {
                     <DeleteIcon
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                            console.log('clicked delete')
+                            resetAnswersMutation.mutate()
                         }}
                     />
                 </div>
