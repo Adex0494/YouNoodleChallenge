@@ -37,7 +37,7 @@ export function TableView() {
     const navigate = useNavigate()
     const resetAnswersMutation = useResetAnswers()
 
-    const getInterests = () =>
+    const getInterestsString = () =>
         answers.interests
             .map(interest => {
                 const entry = Object.entries(interest)[0]
@@ -54,7 +54,7 @@ export function TableView() {
         createData('Name', answers.name),
         createData('Age', answers.age),
         createData('Email', answers.mail),
-        createData('Interests', getInterests()),
+        createData('Interests', getInterestsString()),
     ]
     return (
         <div id="table-view">

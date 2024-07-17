@@ -20,6 +20,7 @@ export const FormView = () => {
     }, [answers.interests])
 
     const onInterestChangeHandler = (options: CustomCheckboxProps[]) => {
+        //Convert interest options into DomainOptions and set interests
         const interestsMap = options.map(option => ({
             [option.id]: {
                 isChecked: option.checked || false,
@@ -49,6 +50,8 @@ export const FormView = () => {
         })
     })
 
+    // eslint-disable-next-line max-len
+    //Convert interests (DomainOption[]) into the type of options that the Checkboxgroup is expecting (CustomCheckboxProps[])
     const getAnswerInterestsMap = () =>
         interests.map(interest => {
             const entry = Object.entries(interest)[0]
@@ -137,7 +140,8 @@ export const FormView = () => {
                             label="Interests"
                             options={getAnswerInterestsMap()}
                             onChange={e => {
-                                onInterestChangeHandler(e)
+                                // eslint-disable-next-line max-len
+                                onInterestChangeHandler(e) //update the interests...
                                 return onChange(e)
                             }}
                         />
